@@ -1,0 +1,45 @@
+N_VARIANTS: 50
+JS: [726]
+RS: [0.21]
+GEN_SEED: 42
+
+n_subtypes: 3           # fixed number of subtypes for all datasets
+TEMPERATURE_LO: 0.01
+TEMPERATURE_HI: 0.5
+GEN_DIRICHLET_PRIORS: [0.1, 2, 5, 20]
+SUBTYPE_LENGTH_LO: 10 # the lowest possible number of diseased participant any subtype can have
+N_SUB_LO: 3
+N_SUB_HI: 3
+
+SUSTAIN_EVAL_N_FOLD: 5
+N_MCMC: 10000
+N_MCMC_SUSTAIN: 100_000 # 10^5
+MCMC_SEED: 42
+N_SHUFFLE: 2
+N_SUBTYPE_SHUFFLE: 2
+N_STARTPOINTS: 25
+BURN_IN: 500
+THINNING: 1
+PRIOR_N: 1
+PRIOR_V: 1
+
+Z_SCORE_NORM: False 
+
+ALGO_NAMES:
+  - pysubebm 
+  - pysubebm_with_labels
+  - sustain_gmm
+  - sustain_kde
+
+OUTPUT_DIR: 'algo_results'
+
+EXPERIMENT_NAMES:
+  - sn_kjOrdinalDM_xnjNormal             # Experiment 1
+  - sn_kjOrdinalDM_xnjNonNormal          # Experiment 2
+  - sn_kjOrdinalUniform_xnjNormal        # Experiment 3
+  - sn_kjOrdinalUniform_xnjNonNormal     # Experiment 4
+  - sn_kjContinuousBeta_sigmoid          # Experiment 5
+  - sn_kjContinuousBeta_xnjNormal        # Experiment 6
+  - sn_kjContinuousBeta_xnjNonNormal     # Experiment 7
+  - xiNearNormalWithNoise_kjContinuousBeta_sigmoid    # Experiment 8
+  - xiNearNormalWithNoise_kjContinuousBeta_xnjNormal  # Experiment 9
