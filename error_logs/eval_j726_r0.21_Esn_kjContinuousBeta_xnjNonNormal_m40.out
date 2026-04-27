@@ -1,0 +1,27 @@
+run_mlhc.sh started at Sun Apr 26 14:25:52 CDT 2026
+Running in directory: /var/lib/condor/execute/slot1/dir_444501/scratch
+Running with arguments: j726_r0.21_Esn_kjContinuousBeta_xnjNonNormal_m40
+Created logs directory at /var/lib/condor/execute/slot1/dir_444501/scratch/logs
+Extracting environment from /staging/hhao9/env.tar.gz...
+Using extracted environment at .conda_env/bin/python
+=== ENVIRONMENT VALIDATION ===
+Python path: .conda_env/bin/python
+Python version: Python 3.9.25
+📦 Extracting /staging/hhao9/temposub_highdim_data.tar.gz...
+=== STARTING MAIN SCRIPT ===
+Current working directory: /var/lib/condor/execute/slot1/dir_444501/scratch
+Processing with j726_r0.21_Esn_kjContinuousBeta_xnjNonNormal_m40
+2026-04-26 14:26:11,293 [INFO] Running j726_r0.21_Esn_kjContinuousBeta_xnjNonNormal_m40
+2026-04-26 14:26:11,312 [INFO] Number of biomarkers: 100
+2026-04-26 14:33:50,697 [INFO] Iteration 1000/10000, Acceptance Ratio: 12.60%, Log Likelihood: -5388.1012, 
+2026-04-26 14:41:15,164 [INFO] Iteration 2000/10000, Acceptance Ratio: 8.95%, Log Likelihood: -5026.2990, 
+2026-04-26 14:48:37,872 [INFO] Iteration 3000/10000, Acceptance Ratio: 6.50%, Log Likelihood: -4948.8581, 
+2026-04-26 14:56:01,188 [INFO] Iteration 4000/10000, Acceptance Ratio: 4.92%, Log Likelihood: -4929.9504, 
+2026-04-26 15:03:21,406 [INFO] Iteration 5000/10000, Acceptance Ratio: 3.94%, Log Likelihood: -4929.9504, 
+2026-04-26 15:10:40,615 [INFO] Iteration 6000/10000, Acceptance Ratio: 3.28%, Log Likelihood: -4929.9504, 
+2026-04-26 15:18:01,579 [INFO] Iteration 7000/10000, Acceptance Ratio: 2.81%, Log Likelihood: -4929.9504, 
+2026-04-26 15:25:21,175 [INFO] Iteration 8000/10000, Acceptance Ratio: 2.54%, Log Likelihood: -4906.8489, 
+2026-04-26 15:32:39,314 [INFO] Iteration 9000/10000, Acceptance Ratio: 2.26%, Log Likelihood: -4906.8489, 
+2026-04-26 15:39:59,472 [INFO] Iteration 10000/10000, Acceptance Ratio: 2.06%, Log Likelihood: -4895.0112, 
+Cleaning up pickle files for j726_r0.21_Esn_kjContinuousBeta_xnjNonNormal_m40
+✅ Script completed at Sun Apr 26 15:41:00 CDT 2026

@@ -1,0 +1,27 @@
+run_mlhc.sh started at Sun Apr 26 14:10:51 CDT 2026
+Running in directory: /var/lib/condor/execute/slot1/dir_4066106/scratch
+Running with arguments: j726_r0.21_Esn_kjOrdinalUniform_xnjNormal_m33
+Created logs directory at /var/lib/condor/execute/slot1/dir_4066106/scratch/logs
+Extracting environment from /staging/hhao9/env.tar.gz...
+Using extracted environment at .conda_env/bin/python
+=== ENVIRONMENT VALIDATION ===
+Python path: .conda_env/bin/python
+Python version: Python 3.9.25
+📦 Extracting /staging/hhao9/temposub_highdim_data.tar.gz...
+=== STARTING MAIN SCRIPT ===
+Current working directory: /var/lib/condor/execute/slot1/dir_4066106/scratch
+Processing with j726_r0.21_Esn_kjOrdinalUniform_xnjNormal_m33
+2026-04-26 14:11:21,444 [INFO] Running j726_r0.21_Esn_kjOrdinalUniform_xnjNormal_m33
+2026-04-26 14:11:21,463 [INFO] Number of biomarkers: 100
+2026-04-26 14:19:38,915 [INFO] Iteration 1000/10000, Acceptance Ratio: 20.20%, Log Likelihood: 27369.1889, 
+2026-04-26 14:27:58,641 [INFO] Iteration 2000/10000, Acceptance Ratio: 11.70%, Log Likelihood: 27511.2124, 
+2026-04-26 14:36:00,113 [INFO] Iteration 3000/10000, Acceptance Ratio: 9.17%, Log Likelihood: 27701.5307, 
+2026-04-26 14:44:13,008 [INFO] Iteration 4000/10000, Acceptance Ratio: 7.28%, Log Likelihood: 27753.2633, 
+2026-04-26 14:52:50,134 [INFO] Iteration 5000/10000, Acceptance Ratio: 6.24%, Log Likelihood: 27773.3504, 
+2026-04-26 15:01:30,128 [INFO] Iteration 6000/10000, Acceptance Ratio: 5.28%, Log Likelihood: 27799.2800, 
+2026-04-26 15:10:06,964 [INFO] Iteration 7000/10000, Acceptance Ratio: 4.53%, Log Likelihood: 27799.2800, 
+2026-04-26 15:18:41,966 [INFO] Iteration 8000/10000, Acceptance Ratio: 3.96%, Log Likelihood: 27799.2800, 
+2026-04-26 15:26:57,912 [INFO] Iteration 9000/10000, Acceptance Ratio: 3.52%, Log Likelihood: 27799.2800, 
+2026-04-26 15:35:55,503 [INFO] Iteration 10000/10000, Acceptance Ratio: 3.17%, Log Likelihood: 27799.2800, 
+Cleaning up pickle files for j726_r0.21_Esn_kjOrdinalUniform_xnjNormal_m33
+✅ Script completed at Sun Apr 26 15:37:04 CDT 2026

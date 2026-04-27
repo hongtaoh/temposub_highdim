@@ -1,0 +1,27 @@
+run_mlhc.sh started at Sun Apr 26 13:38:53 CDT 2026
+Running in directory: /var/lib/condor/execute/slot1/dir_1398876/scratch
+Running with arguments: j726_r0.21_Esn_kjOrdinalUniform_xnjNonNormal_m19
+Created logs directory at /var/lib/condor/execute/slot1/dir_1398876/scratch/logs
+Extracting environment from /staging/hhao9/env.tar.gz...
+Using extracted environment at .conda_env/bin/python
+=== ENVIRONMENT VALIDATION ===
+Python path: .conda_env/bin/python
+Python version: Python 3.9.25
+📦 Extracting /staging/hhao9/temposub_highdim_data.tar.gz...
+=== STARTING MAIN SCRIPT ===
+Current working directory: /var/lib/condor/execute/slot1/dir_1398876/scratch
+Processing with j726_r0.21_Esn_kjOrdinalUniform_xnjNonNormal_m19
+2026-04-26 13:39:08,007 [INFO] Running j726_r0.21_Esn_kjOrdinalUniform_xnjNonNormal_m19
+2026-04-26 13:39:08,023 [INFO] Number of biomarkers: 100
+2026-04-26 13:46:12,160 [INFO] Iteration 1000/10000, Acceptance Ratio: 20.70%, Log Likelihood: 2911.7114, 
+2026-04-26 13:53:01,325 [INFO] Iteration 2000/10000, Acceptance Ratio: 13.30%, Log Likelihood: 3221.8145, 
+2026-04-26 13:59:50,390 [INFO] Iteration 3000/10000, Acceptance Ratio: 9.93%, Log Likelihood: 3310.9422, 
+2026-04-26 14:06:39,691 [INFO] Iteration 4000/10000, Acceptance Ratio: 8.93%, Log Likelihood: 3422.1477, 
+2026-04-26 14:13:30,465 [INFO] Iteration 5000/10000, Acceptance Ratio: 7.40%, Log Likelihood: 3440.1765, 
+2026-04-26 14:20:21,146 [INFO] Iteration 6000/10000, Acceptance Ratio: 6.17%, Log Likelihood: 3440.1765, 
+2026-04-26 14:27:11,602 [INFO] Iteration 7000/10000, Acceptance Ratio: 5.29%, Log Likelihood: 3440.1765, 
+2026-04-26 14:34:02,257 [INFO] Iteration 8000/10000, Acceptance Ratio: 4.76%, Log Likelihood: 3482.8196, 
+2026-04-26 14:40:52,119 [INFO] Iteration 9000/10000, Acceptance Ratio: 4.67%, Log Likelihood: 3523.4694, 
+2026-04-26 14:47:41,719 [INFO] Iteration 10000/10000, Acceptance Ratio: 4.25%, Log Likelihood: 3530.4004, 
+Cleaning up pickle files for j726_r0.21_Esn_kjOrdinalUniform_xnjNonNormal_m19
+✅ Script completed at Sun Apr 26 14:48:38 CDT 2026

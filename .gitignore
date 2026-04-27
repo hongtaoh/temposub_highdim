@@ -1,9 +1,7 @@
 deprecated/
-logs/
 data.tar.gz
 env.tar.gz
 data/
-error_logs/
 ADNIMERGE.csv
 adni.csv
 TODO.md

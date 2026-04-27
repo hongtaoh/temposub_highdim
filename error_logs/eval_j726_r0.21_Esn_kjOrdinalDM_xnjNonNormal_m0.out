@@ -1,0 +1,27 @@
+run_mlhc.sh started at Sun Apr 26 12:28:57 CDT 2026
+Running in directory: /var/lib/condor/execute/slot1/dir_617711/scratch
+Running with arguments: j726_r0.21_Esn_kjOrdinalDM_xnjNonNormal_m0
+Created logs directory at /var/lib/condor/execute/slot1/dir_617711/scratch/logs
+Extracting environment from /staging/hhao9/env.tar.gz...
+Using extracted environment at .conda_env/bin/python
+=== ENVIRONMENT VALIDATION ===
+Python path: .conda_env/bin/python
+Python version: Python 3.9.25
+📦 Extracting /staging/hhao9/temposub_highdim_data.tar.gz...
+=== STARTING MAIN SCRIPT ===
+Current working directory: /var/lib/condor/execute/slot1/dir_617711/scratch
+Processing with j726_r0.21_Esn_kjOrdinalDM_xnjNonNormal_m0
+2026-04-26 12:29:34,374 [INFO] Running j726_r0.21_Esn_kjOrdinalDM_xnjNonNormal_m0
+2026-04-26 12:29:34,392 [INFO] Number of biomarkers: 100
+2026-04-26 12:38:25,046 [INFO] Iteration 1000/10000, Acceptance Ratio: 14.30%, Log Likelihood: -585.3345, 
+2026-04-26 12:46:59,165 [INFO] Iteration 2000/10000, Acceptance Ratio: 8.75%, Log Likelihood: -351.8079, 
+2026-04-26 12:55:36,023 [INFO] Iteration 3000/10000, Acceptance Ratio: 6.67%, Log Likelihood: -128.7125, 
+2026-04-26 13:04:14,287 [INFO] Iteration 4000/10000, Acceptance Ratio: 5.55%, Log Likelihood: -42.4288, 
+2026-04-26 13:13:01,634 [INFO] Iteration 5000/10000, Acceptance Ratio: 4.70%, Log Likelihood: -2.4601, 
+2026-04-26 13:21:55,485 [INFO] Iteration 6000/10000, Acceptance Ratio: 4.20%, Log Likelihood: 73.5120, 
+2026-04-26 13:30:44,198 [INFO] Iteration 7000/10000, Acceptance Ratio: 3.86%, Log Likelihood: 176.1726, 
+2026-04-26 13:39:31,982 [INFO] Iteration 8000/10000, Acceptance Ratio: 3.61%, Log Likelihood: 261.5109, 
+2026-04-26 13:48:19,781 [INFO] Iteration 9000/10000, Acceptance Ratio: 3.29%, Log Likelihood: 270.8729, 
+2026-04-26 13:57:17,415 [INFO] Iteration 10000/10000, Acceptance Ratio: 3.07%, Log Likelihood: 359.7000, 
+Cleaning up pickle files for j726_r0.21_Esn_kjOrdinalDM_xnjNonNormal_m0
+✅ Script completed at Sun Apr 26 13:58:31 CDT 2026

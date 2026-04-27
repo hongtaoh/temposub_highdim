@@ -1,0 +1,27 @@
+run_mlhc.sh started at Sun Apr 26 13:50:15 CDT 2026
+Running in directory: /var/lib/condor/execute/slot1/dir_3545507/scratch
+Running with arguments: j726_r0.21_ExiNearNormalWithNoise_kjContinuousBeta_xnjNormal_m24
+Created logs directory at /var/lib/condor/execute/slot1/dir_3545507/scratch/logs
+Extracting environment from /staging/hhao9/env.tar.gz...
+Using extracted environment at .conda_env/bin/python
+=== ENVIRONMENT VALIDATION ===
+Python path: .conda_env/bin/python
+Python version: Python 3.9.25
+📦 Extracting /staging/hhao9/temposub_highdim_data.tar.gz...
+=== STARTING MAIN SCRIPT ===
+Current working directory: /var/lib/condor/execute/slot1/dir_3545507/scratch
+Processing with j726_r0.21_ExiNearNormalWithNoise_kjContinuousBeta_xnjNormal_m24
+2026-04-26 13:50:34,432 [INFO] Running j726_r0.21_ExiNearNormalWithNoise_kjContinuousBeta_xnjNormal_m24
+2026-04-26 13:50:34,449 [INFO] Number of biomarkers: 100
+2026-04-26 13:57:42,449 [INFO] Iteration 1000/10000, Acceptance Ratio: 13.20%, Log Likelihood: 24709.8297, 
+2026-04-26 14:04:37,715 [INFO] Iteration 2000/10000, Acceptance Ratio: 11.00%, Log Likelihood: 26130.7503, 
+2026-04-26 14:11:33,973 [INFO] Iteration 3000/10000, Acceptance Ratio: 8.00%, Log Likelihood: 26426.0546, 
+2026-04-26 14:18:29,781 [INFO] Iteration 4000/10000, Acceptance Ratio: 6.47%, Log Likelihood: 26657.7256, 
+2026-04-26 14:25:23,470 [INFO] Iteration 5000/10000, Acceptance Ratio: 5.56%, Log Likelihood: 26783.1549, 
+2026-04-26 14:32:18,374 [INFO] Iteration 6000/10000, Acceptance Ratio: 4.63%, Log Likelihood: 26783.1549, 
+2026-04-26 14:39:13,596 [INFO] Iteration 7000/10000, Acceptance Ratio: 3.97%, Log Likelihood: 26783.1549, 
+2026-04-26 14:46:09,509 [INFO] Iteration 8000/10000, Acceptance Ratio: 3.61%, Log Likelihood: 26941.4872, 
+2026-04-26 14:53:02,744 [INFO] Iteration 9000/10000, Acceptance Ratio: 3.29%, Log Likelihood: 26981.9447, 
+2026-04-26 14:59:59,636 [INFO] Iteration 10000/10000, Acceptance Ratio: 3.06%, Log Likelihood: 27070.1223, 
+Cleaning up pickle files for j726_r0.21_ExiNearNormalWithNoise_kjContinuousBeta_xnjNormal_m24
+✅ Script completed at Sun Apr 26 15:00:57 CDT 2026

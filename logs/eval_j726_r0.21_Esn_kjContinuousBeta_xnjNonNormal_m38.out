@@ -1,0 +1,27 @@
+run_mlhc.sh started at Sun Apr 26 14:22:12 CDT 2026
+Running in directory: /var/lib/condor/execute/slot1/dir_3338518/scratch
+Running with arguments: j726_r0.21_Esn_kjContinuousBeta_xnjNonNormal_m38
+Created logs directory at /var/lib/condor/execute/slot1/dir_3338518/scratch/logs
+Extracting environment from /staging/hhao9/env.tar.gz...
+Using extracted environment at .conda_env/bin/python
+=== ENVIRONMENT VALIDATION ===
+Python path: .conda_env/bin/python
+Python version: Python 3.9.25
+📦 Extracting /staging/hhao9/temposub_highdim_data.tar.gz...
+=== STARTING MAIN SCRIPT ===
+Current working directory: /var/lib/condor/execute/slot1/dir_3338518/scratch
+Processing with j726_r0.21_Esn_kjContinuousBeta_xnjNonNormal_m38
+2026-04-26 14:22:42,072 [INFO] Running j726_r0.21_Esn_kjContinuousBeta_xnjNonNormal_m38
+2026-04-26 14:22:42,109 [INFO] Number of biomarkers: 100
+2026-04-26 14:32:04,535 [INFO] Iteration 1000/10000, Acceptance Ratio: 12.80%, Log Likelihood: 1582.3101, 
+2026-04-26 14:40:57,428 [INFO] Iteration 2000/10000, Acceptance Ratio: 7.70%, Log Likelihood: 1708.3795, 
+2026-04-26 14:50:01,665 [INFO] Iteration 3000/10000, Acceptance Ratio: 5.57%, Log Likelihood: 1908.7287, 
+2026-04-26 14:59:09,192 [INFO] Iteration 4000/10000, Acceptance Ratio: 4.17%, Log Likelihood: 1908.7287, 
+2026-04-26 15:08:32,008 [INFO] Iteration 5000/10000, Acceptance Ratio: 3.44%, Log Likelihood: 1931.9064, 
+2026-04-26 15:17:51,670 [INFO] Iteration 6000/10000, Acceptance Ratio: 2.87%, Log Likelihood: 1931.9064, 
+2026-04-26 15:26:44,843 [INFO] Iteration 7000/10000, Acceptance Ratio: 2.51%, Log Likelihood: 1961.9544, 
+2026-04-26 15:36:54,080 [INFO] Iteration 8000/10000, Acceptance Ratio: 2.20%, Log Likelihood: 1961.9544, 
+2026-04-26 15:46:01,240 [INFO] Iteration 9000/10000, Acceptance Ratio: 1.96%, Log Likelihood: 1961.9544, 
+2026-04-26 15:57:05,037 [INFO] Iteration 10000/10000, Acceptance Ratio: 1.76%, Log Likelihood: 1961.9544, 
+Cleaning up pickle files for j726_r0.21_Esn_kjContinuousBeta_xnjNonNormal_m38
+✅ Script completed at Sun Apr 26 15:59:13 CDT 2026

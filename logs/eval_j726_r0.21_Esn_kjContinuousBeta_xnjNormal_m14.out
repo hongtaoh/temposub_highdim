@@ -1,0 +1,27 @@
+run_mlhc.sh started at Sun Apr 26 13:20:23 CDT 2026
+Running in directory: /var/lib/condor/execute/slot1/dir_1965482/scratch
+Running with arguments: j726_r0.21_Esn_kjContinuousBeta_xnjNormal_m14
+Created logs directory at /var/lib/condor/execute/slot1/dir_1965482/scratch/logs
+Extracting environment from /staging/hhao9/env.tar.gz...
+Using extracted environment at .conda_env/bin/python
+=== ENVIRONMENT VALIDATION ===
+Python path: .conda_env/bin/python
+Python version: Python 3.9.25
+📦 Extracting /staging/hhao9/temposub_highdim_data.tar.gz...
+=== STARTING MAIN SCRIPT ===
+Current working directory: /var/lib/condor/execute/slot1/dir_1965482/scratch
+Processing with j726_r0.21_Esn_kjContinuousBeta_xnjNormal_m14
+2026-04-26 13:20:38,561 [INFO] Running j726_r0.21_Esn_kjContinuousBeta_xnjNormal_m14
+2026-04-26 13:20:38,577 [INFO] Number of biomarkers: 100
+2026-04-26 13:27:39,756 [INFO] Iteration 1000/10000, Acceptance Ratio: 16.60%, Log Likelihood: 27151.2414, 
+2026-04-26 13:34:26,446 [INFO] Iteration 2000/10000, Acceptance Ratio: 9.10%, Log Likelihood: 27284.8557, 
+2026-04-26 13:41:14,187 [INFO] Iteration 3000/10000, Acceptance Ratio: 6.20%, Log Likelihood: 27292.7231, 
+2026-04-26 13:48:04,355 [INFO] Iteration 4000/10000, Acceptance Ratio: 5.17%, Log Likelihood: 27378.2833, 
+2026-04-26 13:54:54,638 [INFO] Iteration 5000/10000, Acceptance Ratio: 4.14%, Log Likelihood: 27378.2833, 
+2026-04-26 14:01:44,589 [INFO] Iteration 6000/10000, Acceptance Ratio: 3.45%, Log Likelihood: 27378.2833, 
+2026-04-26 14:08:35,118 [INFO] Iteration 7000/10000, Acceptance Ratio: 2.96%, Log Likelihood: 27378.2833, 
+2026-04-26 14:15:24,845 [INFO] Iteration 8000/10000, Acceptance Ratio: 2.62%, Log Likelihood: 27387.5181, 
+2026-04-26 14:22:14,321 [INFO] Iteration 9000/10000, Acceptance Ratio: 2.69%, Log Likelihood: 27538.6807, 
+2026-04-26 14:29:04,717 [INFO] Iteration 10000/10000, Acceptance Ratio: 2.51%, Log Likelihood: 27554.0710, 
+Cleaning up pickle files for j726_r0.21_Esn_kjContinuousBeta_xnjNormal_m14
+✅ Script completed at Sun Apr 26 14:30:01 CDT 2026

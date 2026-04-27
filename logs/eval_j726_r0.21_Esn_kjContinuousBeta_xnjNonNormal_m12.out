@@ -1,0 +1,27 @@
+run_mlhc.sh started at Sun Apr 26 13:05:02 CDT 2026
+Running in directory: /var/lib/condor/execute/slot1/dir_3544573/scratch
+Running with arguments: j726_r0.21_Esn_kjContinuousBeta_xnjNonNormal_m12
+Created logs directory at /var/lib/condor/execute/slot1/dir_3544573/scratch/logs
+Extracting environment from /staging/hhao9/env.tar.gz...
+Using extracted environment at .conda_env/bin/python
+=== ENVIRONMENT VALIDATION ===
+Python path: .conda_env/bin/python
+Python version: Python 3.9.25
+📦 Extracting /staging/hhao9/temposub_highdim_data.tar.gz...
+=== STARTING MAIN SCRIPT ===
+Current working directory: /var/lib/condor/execute/slot1/dir_3544573/scratch
+Processing with j726_r0.21_Esn_kjContinuousBeta_xnjNonNormal_m12
+2026-04-26 13:05:18,861 [INFO] Running j726_r0.21_Esn_kjContinuousBeta_xnjNonNormal_m12
+2026-04-26 13:05:18,877 [INFO] Number of biomarkers: 100
+2026-04-26 13:12:19,756 [INFO] Iteration 1000/10000, Acceptance Ratio: 9.10%, Log Likelihood: -3430.5933, 
+2026-04-26 13:19:06,947 [INFO] Iteration 2000/10000, Acceptance Ratio: 6.95%, Log Likelihood: -2952.3228, 
+2026-04-26 13:25:53,522 [INFO] Iteration 3000/10000, Acceptance Ratio: 4.93%, Log Likelihood: -2888.4110, 
+2026-04-26 13:32:40,193 [INFO] Iteration 4000/10000, Acceptance Ratio: 4.38%, Log Likelihood: -2738.7801, 
+2026-04-26 13:39:26,841 [INFO] Iteration 5000/10000, Acceptance Ratio: 3.50%, Log Likelihood: -2738.7801, 
+2026-04-26 13:46:13,497 [INFO] Iteration 6000/10000, Acceptance Ratio: 3.18%, Log Likelihood: -2706.7547, 
+2026-04-26 13:53:00,165 [INFO] Iteration 7000/10000, Acceptance Ratio: 2.74%, Log Likelihood: -2711.0151, 
+2026-04-26 13:59:46,359 [INFO] Iteration 8000/10000, Acceptance Ratio: 2.40%, Log Likelihood: -2711.0151, 
+2026-04-26 14:06:33,026 [INFO] Iteration 9000/10000, Acceptance Ratio: 2.13%, Log Likelihood: -2711.0151, 
+2026-04-26 14:13:18,932 [INFO] Iteration 10000/10000, Acceptance Ratio: 1.92%, Log Likelihood: -2711.0151, 
+Cleaning up pickle files for j726_r0.21_Esn_kjContinuousBeta_xnjNonNormal_m12
+✅ Script completed at Sun Apr 26 14:14:15 CDT 2026

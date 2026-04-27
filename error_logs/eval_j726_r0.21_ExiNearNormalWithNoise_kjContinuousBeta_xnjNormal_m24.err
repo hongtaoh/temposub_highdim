@@ -1,0 +1,6 @@
+mkdir -p failed for path /home/hhao9/.config/matplotlib: [Errno 13] Permission denied: '/home/hhao9'
+Matplotlib created a temporary cache directory at /tmp/matplotlib-j3kla7id because there was an issue with the default path (/home/hhao9/.config/matplotlib); it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+WARNING:root:File does not exist, skipping removal: algo_results/pysubebm_with_labels/heatmaps/j726_r0.21_ExiNearNormalWithNoise_kjContinuousBeta_xnjNormal_m24_heatmap.png
+WARNING:root:File does not exist, skipping removal: algo_results/pysubebm_with_labels/traceplots/j726_r0.21_ExiNearNormalWithNoise_kjContinuousBeta_xnjNormal_m24_traceplot.png
+WARNING:root:File does not exist, skipping removal: algo_results/pysubebm_with_labels/results/j726_r0.21_ExiNearNormalWithNoise_kjContinuousBeta_xnjNormal_m24_results.json
+WARNING:root:File does not exist, skipping removal: algo_results/pysubebm_with_labels/logs/j726_r0.21_ExiNearNormalWithNoise_kjContinuousBeta_xnjNormal_m24.log

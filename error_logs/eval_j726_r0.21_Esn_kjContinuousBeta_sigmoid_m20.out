@@ -1,0 +1,27 @@
+run_mlhc.sh started at Sun Apr 26 13:39:42 CDT 2026
+Running in directory: /var/lib/condor/execute/slot1/dir_84052/scratch
+Running with arguments: j726_r0.21_Esn_kjContinuousBeta_sigmoid_m20
+Created logs directory at /var/lib/condor/execute/slot1/dir_84052/scratch/logs
+Extracting environment from /staging/hhao9/env.tar.gz...
+Using extracted environment at .conda_env/bin/python
+=== ENVIRONMENT VALIDATION ===
+Python path: .conda_env/bin/python
+Python version: Python 3.9.25
+📦 Extracting /staging/hhao9/temposub_highdim_data.tar.gz...
+=== STARTING MAIN SCRIPT ===
+Current working directory: /var/lib/condor/execute/slot1/dir_84052/scratch
+Processing with j726_r0.21_Esn_kjContinuousBeta_sigmoid_m20
+2026-04-26 13:39:58,979 [INFO] Running j726_r0.21_Esn_kjContinuousBeta_sigmoid_m20
+2026-04-26 13:39:58,996 [INFO] Number of biomarkers: 100
+2026-04-26 13:47:05,595 [INFO] Iteration 1000/10000, Acceptance Ratio: 15.40%, Log Likelihood: 31275.0384, 
+2026-04-26 13:53:56,959 [INFO] Iteration 2000/10000, Acceptance Ratio: 10.10%, Log Likelihood: 31542.3674, 
+2026-04-26 14:00:49,741 [INFO] Iteration 3000/10000, Acceptance Ratio: 7.13%, Log Likelihood: 31598.3102, 
+2026-04-26 14:07:41,680 [INFO] Iteration 4000/10000, Acceptance Ratio: 5.47%, Log Likelihood: 31616.2505, 
+2026-04-26 14:14:32,141 [INFO] Iteration 5000/10000, Acceptance Ratio: 4.38%, Log Likelihood: 31616.2505, 
+2026-04-26 14:21:24,031 [INFO] Iteration 6000/10000, Acceptance Ratio: 3.65%, Log Likelihood: 31616.2505, 
+2026-04-26 14:28:17,388 [INFO] Iteration 7000/10000, Acceptance Ratio: 3.13%, Log Likelihood: 31616.2505, 
+2026-04-26 14:35:09,381 [INFO] Iteration 8000/10000, Acceptance Ratio: 2.74%, Log Likelihood: 31616.2505, 
+2026-04-26 14:42:02,466 [INFO] Iteration 9000/10000, Acceptance Ratio: 2.43%, Log Likelihood: 31616.2505, 
+2026-04-26 14:48:54,716 [INFO] Iteration 10000/10000, Acceptance Ratio: 2.19%, Log Likelihood: 31616.2505, 
+Cleaning up pickle files for j726_r0.21_Esn_kjContinuousBeta_sigmoid_m20
+✅ Script completed at Sun Apr 26 14:49:51 CDT 2026

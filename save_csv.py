@@ -217,11 +217,11 @@ def main():
                         subtype_acc = np.nan 
                     mean_stage_healthy = data['mean_stage_healthy_mcmc']
                 runtime = data['runtime']/60
-                if E_num == 1:
-                    runtime_cross_validation = data['runtime_cross_validation']
-                    absolute_error_n_subtypes = data['absolute_error']
-                    relative_error = data['relative_error']
-                    correct_bool = data['correct_bool']
+                # if E_num == 1:
+                #     runtime_cross_validation = data['runtime_cross_validation']
+                #     absolute_error_n_subtypes = data['absolute_error']
+                #     relative_error = data['relative_error']
+                #     correct_bool = data['correct_bool']
 
                 records.append({
                     'J': J,
