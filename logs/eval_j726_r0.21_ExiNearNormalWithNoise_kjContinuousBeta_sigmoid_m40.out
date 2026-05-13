@@ -1,7 +1,7 @@
-run_mlhc.sh started at Sun Apr 26 14:25:54 CDT 2026
-Running in directory: /var/lib/condor/execute/slot1/dir_1432478/scratch
+run_mlhc.sh started at Mon May  4 23:28:45 CDT 2026
+Running in directory: /var/lib/condor/execute/slot1/dir_382022/scratch
 Running with arguments: j726_r0.21_ExiNearNormalWithNoise_kjContinuousBeta_sigmoid_m40
-Created logs directory at /var/lib/condor/execute/slot1/dir_1432478/scratch/logs
+Created logs directory at /var/lib/condor/execute/slot1/dir_382022/scratch/logs
 Extracting environment from /staging/hhao9/env.tar.gz...
 Using extracted environment at .conda_env/bin/python
 === ENVIRONMENT VALIDATION ===
@@ -9,19 +9,79 @@ Python path: .conda_env/bin/python
 Python version: Python 3.9.25
 📦 Extracting /staging/hhao9/temposub_highdim_data.tar.gz...
 === STARTING MAIN SCRIPT ===
-Current working directory: /var/lib/condor/execute/slot1/dir_1432478/scratch
+Current working directory: /var/lib/condor/execute/slot1/dir_382022/scratch
 Processing with j726_r0.21_ExiNearNormalWithNoise_kjContinuousBeta_sigmoid_m40
-2026-04-26 14:26:16,684 [INFO] Running j726_r0.21_ExiNearNormalWithNoise_kjContinuousBeta_sigmoid_m40
-2026-04-26 14:26:16,710 [INFO] Number of biomarkers: 100
-2026-04-26 14:34:52,152 [INFO] Iteration 1000/10000, Acceptance Ratio: 15.80%, Log Likelihood: 30312.8218, 
-2026-04-26 14:42:39,376 [INFO] Iteration 2000/10000, Acceptance Ratio: 8.25%, Log Likelihood: 30377.8926, 
-2026-04-26 14:51:38,667 [INFO] Iteration 3000/10000, Acceptance Ratio: 6.03%, Log Likelihood: 30421.8844, 
-2026-04-26 15:01:01,203 [INFO] Iteration 4000/10000, Acceptance Ratio: 4.75%, Log Likelihood: 30460.9484, 
-2026-04-26 15:10:18,809 [INFO] Iteration 5000/10000, Acceptance Ratio: 3.88%, Log Likelihood: 30483.3414, 
-2026-04-26 15:21:01,971 [INFO] Iteration 6000/10000, Acceptance Ratio: 3.23%, Log Likelihood: 30483.3414, 
-2026-04-26 15:33:52,079 [INFO] Iteration 7000/10000, Acceptance Ratio: 2.90%, Log Likelihood: 30506.9466, 
-2026-04-26 15:46:26,697 [INFO] Iteration 8000/10000, Acceptance Ratio: 2.54%, Log Likelihood: 30506.9466, 
-2026-04-26 15:57:59,803 [INFO] Iteration 9000/10000, Acceptance Ratio: 2.26%, Log Likelihood: 30506.9466, 
-2026-04-26 16:06:03,942 [INFO] Iteration 10000/10000, Acceptance Ratio: 2.07%, Log Likelihood: 30522.1091, 
-Cleaning up pickle files for j726_r0.21_ExiNearNormalWithNoise_kjContinuousBeta_sigmoid_m40
-✅ Script completed at Sun Apr 26 16:07:10 CDT 2026
+2026-05-04 23:29:15,668 [INFO] Running j726_r0.21_ExiNearNormalWithNoise_kjContinuousBeta_sigmoid_m40
+2026-05-04 23:29:15,691 [INFO] Number of biomarkers: 100
+2026-05-04 23:38:41,338 [INFO] Iteration 1000/10000, Acceptance Ratio: 15.50%, Log Likelihood: 30266.4804, 
+2026-05-04 23:49:11,523 [INFO] Iteration 2000/10000, Acceptance Ratio: 10.40%, Log Likelihood: 30500.4124, 
+2026-05-05 00:01:14,878 [INFO] Iteration 3000/10000, Acceptance Ratio: 7.37%, Log Likelihood: 30564.1623, 
+2026-05-05 00:12:05,161 [INFO] Iteration 4000/10000, Acceptance Ratio: 5.85%, Log Likelihood: 30632.4258, 
+2026-05-05 00:22:23,406 [INFO] Iteration 5000/10000, Acceptance Ratio: 4.80%, Log Likelihood: 30637.7047, 
+2026-05-05 00:32:26,083 [INFO] Iteration 6000/10000, Acceptance Ratio: 4.28%, Log Likelihood: 30678.8412, 
+2026-05-05 00:42:47,271 [INFO] Iteration 7000/10000, Acceptance Ratio: 3.73%, Log Likelihood: 30678.6637, 
+2026-05-05 00:52:42,946 [INFO] Iteration 8000/10000, Acceptance Ratio: 3.26%, Log Likelihood: 30678.6637, 
+2026-05-05 01:02:49,680 [INFO] Iteration 9000/10000, Acceptance Ratio: 2.90%, Log Likelihood: 30678.6637, 
+2026-05-05 01:13:14,239 [INFO] Iteration 10000/10000, Acceptance Ratio: 2.61%, Log Likelihood: 30678.6637, 
+2026-05-05 01:14:42,665 [INFO] Starting cleanup ...
+2026-05-05 01:14:42,665 [WARNING] File does not exist, skipping removal: algo_results/pysubebm/heatmaps/j726_r0.21_ExiNearNormalWithNoise_kjContinuousBeta_sigmoid_m40_heatmap.png
+2026-05-05 01:14:42,665 [WARNING] File does not exist, skipping removal: algo_results/pysubebm/traceplots/j726_r0.21_ExiNearNormalWithNoise_kjContinuousBeta_sigmoid_m40_traceplot.png
+2026-05-05 01:14:42,665 [WARNING] File does not exist, skipping removal: algo_results/pysubebm/results/j726_r0.21_ExiNearNormalWithNoise_kjContinuousBeta_sigmoid_m40_results.json
+2026-05-05 01:14:42,665 [WARNING] File does not exist, skipping removal: algo_results/pysubebm/logs/j726_r0.21_ExiNearNormalWithNoise_kjContinuousBeta_sigmoid_m40.log
+2026-05-05 01:14:42,665 [INFO] Running j726_r0.21_ExiNearNormalWithNoise_kjContinuousBeta_sigmoid_m40
+2026-05-05 01:14:42,688 [INFO] Number of biomarkers: 100
+2026-05-05 01:27:52,730 [INFO] Iteration 1000/10000, Acceptance Ratio: 11.80%, Log Likelihood: 29422.1005, 
+2026-05-05 01:41:31,196 [INFO] Iteration 2000/10000, Acceptance Ratio: 9.00%, Log Likelihood: 29883.8052, 
+2026-05-05 01:54:57,145 [INFO] Iteration 3000/10000, Acceptance Ratio: 6.43%, Log Likelihood: 29944.8511, 
+2026-05-05 02:08:23,075 [INFO] Iteration 4000/10000, Acceptance Ratio: 5.17%, Log Likelihood: 30006.4720, 
+2026-05-05 02:21:18,977 [INFO] Iteration 5000/10000, Acceptance Ratio: 4.28%, Log Likelihood: 30059.3936, 
+2026-05-05 02:35:04,263 [INFO] Iteration 6000/10000, Acceptance Ratio: 3.87%, Log Likelihood: 30156.5609, 
+2026-05-05 02:48:20,976 [INFO] Iteration 7000/10000, Acceptance Ratio: 3.31%, Log Likelihood: 30156.5609, 
+2026-05-05 03:01:17,964 [INFO] Iteration 8000/10000, Acceptance Ratio: 2.99%, Log Likelihood: 30187.1965, 
+2026-05-05 03:14:48,591 [INFO] Iteration 9000/10000, Acceptance Ratio: 2.66%, Log Likelihood: 30187.1965, 
+2026-05-05 03:27:58,132 [INFO] Iteration 10000/10000, Acceptance Ratio: 2.39%, Log Likelihood: 30187.1965, 
+Failed to find pickle file: algo_results/sustain_gmm/pickle_files/j726_r0.21_ExiNearNormalWithNoise_kjContinuousBeta_sigmoid_m40_subtype0.pickle. Running SuStaIn model for 0 subtype.
+Finding ML solution to 1 cluster problem
+Overall ML likelihood is -8270.930681057293
+Failed to find pickle file: algo_results/sustain_gmm/pickle_files/j726_r0.21_ExiNearNormalWithNoise_kjContinuousBeta_sigmoid_m40_subtype1.pickle. Running SuStaIn model for 1 subtype.
+Splitting cluster 1 of 1
+ + Resolving 2 cluster problem
+ + Finding ML solution from hierarchical initialisation
+- ML likelihood is [-7511.04919289]
+Overall ML likelihood is [-7511.04919289]
+Failed to find pickle file: algo_results/sustain_gmm/pickle_files/j726_r0.21_ExiNearNormalWithNoise_kjContinuousBeta_sigmoid_m40_subtype2.pickle. Running SuStaIn model for 2 subtype.
+Splitting cluster 1 of 2
+ + Resolving 2 cluster problem
+ + Finding ML solution from hierarchical initialisation
+- ML likelihood is [-7219.34301776]
+Splitting cluster 2 of 2
+ + Resolving 2 cluster problem
+ + Finding ML solution from hierarchical initialisation
+- ML likelihood is [-7226.50977117]
+Overall ML likelihood is [-7219.34301776]
+First == Best? True
+First == Pickle ML? True
+Best == Pickle ML? True
+Failed to find pickle file: algo_results/sustain_kde/pickle_files/j726_r0.21_ExiNearNormalWithNoise_kjContinuousBeta_sigmoid_m40_subtype0.pickle. Running SuStaIn model for 0 subtype.
+Finding ML solution to 1 cluster problem
+Overall ML likelihood is -148943.7013562165
+Failed to find pickle file: algo_results/sustain_kde/pickle_files/j726_r0.21_ExiNearNormalWithNoise_kjContinuousBeta_sigmoid_m40_subtype1.pickle. Running SuStaIn model for 1 subtype.
+Splitting cluster 1 of 1
+ + Resolving 2 cluster problem
+ + Finding ML solution from hierarchical initialisation
+- ML likelihood is [-136509.4047435]
+Overall ML likelihood is [-136509.4047435]
+Failed to find pickle file: algo_results/sustain_kde/pickle_files/j726_r0.21_ExiNearNormalWithNoise_kjContinuousBeta_sigmoid_m40_subtype2.pickle. Running SuStaIn model for 2 subtype.
+Splitting cluster 1 of 2
+ + Resolving 2 cluster problem
+ + Finding ML solution from hierarchical initialisation
+- ML likelihood is [-129173.82318134]
+Splitting cluster 2 of 2
+ + Resolving 2 cluster problem
+ + Finding ML solution from hierarchical initialisation
+- ML likelihood is [-129280.02394896]
+Overall ML likelihood is [-129173.82318134]
+First == Best? False
+First == Pickle ML? True
+Best == Pickle ML? False
+✅ Script completed at Tue May  5 15:16:05 CDT 2026

@@ -2,11 +2,12 @@
     "with_labels": 1,
     "burn_in": 500,
     "thinning": 1,
-    "runtime": 4142.297902345657,
+    "runtime": 8817.25104546547,
     "healthy_ratio": 0.2066115702479339,
     "max_log_likelihood": 27720.91600585921,
     "kendalls_tau": 0.3908417508417508,
     "subtype_acc": 0.005767085911310262,
+    "stage_mae": 10.809917355371901,
     "n_subtypes": 3,
     "mean_stage_healthy": 0.05333333333333334,
     "ml_subtype": [

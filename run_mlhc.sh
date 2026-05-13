@@ -37,7 +37,6 @@ else
     exit 1
 fi
 
-
 # ==============================================================================
 # 🧪 Final sanity check
 # ==============================================================================
@@ -69,32 +68,10 @@ else
     exit 1
 fi
 
-
-# ==============================================================================
-# See files present
-# ==============================================================================
-# echo "Files present:"
-# ls -l
-
 # ==============================================================================
 # ▶️ Run Python Script
 # ==============================================================================
 echo "=== STARTING MAIN SCRIPT ==="
 TQDM_DISABLE=1 "$PYTHON_EXEC" ./run_mlhc.py "$@"
-
-# ==============================================================================
-# 🧹 Cleanup pickle files for this run
-# ==============================================================================
-echo "Cleaning up pickle files for $1"
-
-for d in algo_results/sustain_gmm/pickle_files algo_results/sustain_kde/pickle_files
-do
-    if [[ -d "$d" ]]; then
-        # Use quotes around the path pattern in case of spaces
-        rm -f "$d"/*"$1"* 2>/dev/null
-        echo "Deleted files matching *$1* in $d"
-    fi
-done
-
 
 echo "✅ Script completed at $(date)"

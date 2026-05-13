@@ -34,12 +34,12 @@ ALGO_NAMES:
 OUTPUT_DIR: 'algo_results'
 
 EXPERIMENT_NAMES:
-  - sn_kjOrdinalDM_xnjNormal             # Experiment 1
-  - sn_kjOrdinalDM_xnjNonNormal          # Experiment 2
-  - sn_kjOrdinalUniform_xnjNormal        # Experiment 3
-  - sn_kjOrdinalUniform_xnjNonNormal     # Experiment 4
+  # - sn_kjOrdinalDM_xnjNormal             # Experiment 1
+  # - sn_kjOrdinalDM_xnjNonNormal          # Experiment 2
+  # - sn_kjOrdinalUniform_xnjNormal        # Experiment 3
+  # - sn_kjOrdinalUniform_xnjNonNormal     # Experiment 4
   - sn_kjContinuousBeta_sigmoid          # Experiment 5
-  - sn_kjContinuousBeta_xnjNormal        # Experiment 6
-  - sn_kjContinuousBeta_xnjNonNormal     # Experiment 7
+  # - sn_kjContinuousBeta_xnjNormal        # Experiment 6
+  # - sn_kjContinuousBeta_xnjNonNormal     # Experiment 7
   - xiNearNormalWithNoise_kjContinuousBeta_sigmoid    # Experiment 8
-  - xiNearNormalWithNoise_kjContinuousBeta_xnjNormal  # Experiment 9
+  # - xiNearNormalWithNoise_kjContinuousBeta_xnjNormal  # Experiment 9

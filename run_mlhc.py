@@ -69,8 +69,8 @@ if __name__ == "__main__":
     ###################################################################################
     random_state = rng.integers(0, 2**32 - 1)
     # with labels:
-    # for with_labels in [True, False]:
-    for with_labels in [True]:
+    for with_labels in [True, False]:
+    # for with_labels in [True]:
         if with_labels:
             output_dir = os.path.join(OUTPUT_DIR, 'pysubebm_with_labels')
         else:
@@ -81,8 +81,9 @@ if __name__ == "__main__":
             n_subtypes=n_subtypes,
             true_order_matrix=true_order_matrix,
             true_subtype_assignments=true_subtype_assignments,
+            true_stage_assignments=true_stage_assignments,
             output_dir=output_dir,
-            # n_iter=1000,
+            # n_iter=2,
             n_iter=N_MCMC,
             n_shuffle=N_SHUFFLE,
             n_subtype_shuffle=N_SUBTYPE_SHUFFLE,
@@ -99,41 +100,43 @@ if __name__ == "__main__":
             z_score_norm=Z_SCORE_NORM
         )
 
-    # ###################################################################################
-    # # Step2: PYSUSTAIN
-    # ###################################################################################
-    # random_state = rng.integers(0, 2**32 - 1)
-    # run_pysustain(
-    #     filename=filename,
-    #     data_file=data_file, # full path to data 
-    #     sustainType='mixture_GMM', # 'mixture_GMM' 'mixture_KDE'
-    #     n_startpoints=config['N_STARTPOINTS'],
-    #     output_dir=os.path.join(OUTPUT_DIR, 'sustain_gmm'),
-    #     true_n_subtypes=n_subtypes,
-    #     max_n_subtypes=MAX_N_SUBTYPES,
-    #     # n_iter=1000,
-    #     n_iter=N_MCMC_SUSTAIN,
-    #     random_state=random_state,
-    #     SUSTAIN_EVAL_N_FOLD = N_FOLDS,
-    #     true_order_matrix=true_order_matrix,
-    #     true_subtype_assignments=true_subtype_assignments,
-    #     estimate_n_subtypes=estimate_n_subtypes,
-    # )
+    ###################################################################################
+    # Step2: PYSUSTAIN
+    ###################################################################################
+    random_state = rng.integers(0, 2**32 - 1)
+    run_pysustain(
+        filename=filename,
+        data_file=data_file, # full path to data 
+        sustainType='mixture_GMM', # 'mixture_GMM' 'mixture_KDE'
+        n_startpoints=config['N_STARTPOINTS'],
+        output_dir=os.path.join(OUTPUT_DIR, 'sustain_gmm'),
+        true_n_subtypes=n_subtypes,
+        max_n_subtypes=MAX_N_SUBTYPES,
+        # n_iter=10,
+        n_iter=N_MCMC_SUSTAIN,
+        random_state=random_state,
+        SUSTAIN_EVAL_N_FOLD = N_FOLDS,
+        true_order_matrix=true_order_matrix,
+        true_subtype_assignments=true_subtype_assignments,
+        true_stage_assignments=true_stage_assignments,
+        estimate_n_subtypes=estimate_n_subtypes,
+    )
 
-    # random_state = rng.integers(0, 2**32 - 1)
-    # run_pysustain(
-    #     filename=filename,
-    #     data_file=data_file, # full path to data 
-    #     sustainType='mixture_KDE', # 'mixture_GMM' 'mixture_KDE'
-    #     n_startpoints=config['N_STARTPOINTS'],
-    #     output_dir=os.path.join(OUTPUT_DIR, 'sustain_kde'),
-    #     true_n_subtypes=n_subtypes,
-    #     # n_iter=1000,
-    #     n_iter=N_MCMC_SUSTAIN,
-    #     max_n_subtypes=MAX_N_SUBTYPES,
-    #     random_state=random_state,
-    #     SUSTAIN_EVAL_N_FOLD = N_FOLDS,
-    #     true_order_matrix=true_order_matrix,
-    #     true_subtype_assignments=true_subtype_assignments,
-    #     estimate_n_subtypes=estimate_n_subtypes,
-    # )
+    random_state = rng.integers(0, 2**32 - 1)
+    run_pysustain(
+        filename=filename,
+        data_file=data_file, # full path to data 
+        sustainType='mixture_KDE', # 'mixture_GMM' 'mixture_KDE'
+        n_startpoints=config['N_STARTPOINTS'],
+        output_dir=os.path.join(OUTPUT_DIR, 'sustain_kde'),
+        true_n_subtypes=n_subtypes,
+        # n_iter=10,
+        n_iter=N_MCMC_SUSTAIN,
+        max_n_subtypes=MAX_N_SUBTYPES,
+        random_state=random_state,
+        SUSTAIN_EVAL_N_FOLD = N_FOLDS,
+        true_order_matrix=true_order_matrix,
+        true_subtype_assignments=true_subtype_assignments,
+        true_stage_assignments=true_stage_assignments,
+        estimate_n_subtypes=estimate_n_subtypes,
+    )

@@ -46,6 +46,7 @@ def run_pysustain(
         SUSTAIN_EVAL_N_FOLD,
         true_order_matrix:np.ndarray = None,
         true_subtype_assignments:np.ndarray= None,
+        true_stage_assignments:np.ndarray=None,
         estimate_n_subtypes:bool=False
 ) -> None:
     
@@ -144,6 +145,7 @@ def run_pysustain(
             ml_stage=ml_stage_em,
             diseased_mask=diseased_mask
         )
+        stage_mae = float(np.mean(np.abs(ml_stage_em - np.array(true_stage_assignments))))
         end_time = time.time()  
 
         tau_mcmc, subtype_acc_mcmc, mean_stage_healthy_mcmc = utils.get_final_metrics(
@@ -154,11 +156,22 @@ def run_pysustain(
             ml_stage=ml_stage,
             diseased_mask=diseased_mask
         )
+        stage_mae_mcmc = float(np.mean(np.abs(ml_stage - np.array(true_stage_assignments))))
 
         best_order_matrix_em = np.argsort(ml_from_pickle, axis = 1) # n_subtypes, n_biomarkers
         best_order_matrix_mcmc = np.argsort(best_sample, axis = 1)
         tau_argsort = get_tau(np.array(true_order_matrix), best_order_matrix_em)
         tau_argsort_mcmc = get_tau(np.array(true_order_matrix), best_order_matrix_mcmc)
+    else:
+        tau = None
+        subtype_acc=None 
+        mean_stage_healthy=None 
+        tau_mcmc=None 
+        tau_argsort=None 
+        tau_argsort_mcmc=None 
+        mean_stage_healthy_mcmc=None 
+        stage_mae=None
+        stage_mae_mcmc=None
     
     results = {
         "runtime": end_time - start_time,
@@ -168,10 +181,12 @@ def run_pysustain(
         'tau': tau,
         'tau_argsort': tau_argsort,
         'subtype_acc': subtype_acc,
+        'stage_mae': stage_mae,
         'mean_stage_healthy': mean_stage_healthy,
         'tau_mcmc': tau_mcmc,
         'tau_argsort_mcmc': tau_argsort_mcmc,
         'subtype_acc_mcmc': subtype_acc_mcmc,
+        'stage_mae_mcmc':stage_mae_mcmc,
         'mean_stage_healthy_mcmc': mean_stage_healthy_mcmc,
         'true_n_subtypes': true_n_subtypes,
     }
@@ -218,6 +233,7 @@ def eval_pysubebm(
     n_subtypes: int,
     true_order_matrix: np.ndarray,
     true_subtype_assignments: np.ndarray,
+    true_stage_assignments:np.ndarray,
     output_dir: str,
     n_iter: int, 
     burn_in: int,
@@ -242,6 +258,7 @@ def eval_pysubebm(
         n_subtypes=n_subtypes,
         true_order_matrix=true_order_matrix,
         true_subtype_assignments=true_subtype_assignments,
+        true_stage_assignments=true_stage_assignments,
         output_dir=output_dir,
         n_iter=n_iter,
         n_shuffle=n_shuffle,

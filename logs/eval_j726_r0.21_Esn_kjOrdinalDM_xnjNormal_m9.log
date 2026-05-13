@@ -1,103 +1,10 @@
-000 (6208902.081.000) 2026-04-26 12:27:05 Job submitted from host: <128.105.68.112:9618?addrs=128.105.68.112-9618+[2607-f388-2200-100-eaeb-d3ff-fea3-4202]-9618&alias=ap2001.chtc.wisc.edu&noUDP&sock=schedd_9001_840b>
+000 (6290516.009.000) 2026-05-06 11:54:41 Job submitted from host: <128.105.68.112:9618?addrs=128.105.68.112-9618+[2607-f388-2200-100-eaeb-d3ff-fea3-4202]-9618&alias=ap2001.chtc.wisc.edu&noUDP&sock=schedd_9592_e484>
 ...
-040 (6208902.081.000) 2026-04-26 12:53:09 Started transferring input files
-	Transferring to host: <128.105.69.104:9618?addrs=128.105.69.104-9618+[2607-f388-2200-100-1270-fdff-fe56-bccc]-9618&alias=e4032.chtc.wisc.edu&noUDP&sock=slot1_2_1890611_3b6a_130584>
+009 (6290516.009.000) 2026-05-06 11:54:57 Job was aborted.
+	via condor_rm (by user hhao9)
 ...
-040 (6208902.081.000) 2026-04-26 12:53:09 Finished transferring input files
+000 (6290517.009.000) 2026-05-06 11:54:57 Job submitted from host: <128.105.68.112:9618?addrs=128.105.68.112-9618+[2607-f388-2200-100-eaeb-d3ff-fea3-4202]-9618&alias=ap2001.chtc.wisc.edu&noUDP&sock=schedd_9592_e484>
 ...
-001 (6208902.081.000) 2026-04-26 12:53:09 Job executing on host: <128.105.69.104:9618?addrs=128.105.69.104-9618+[2607-f388-2200-100-1270-fdff-fe56-bccc]-9618&alias=e4032.chtc.wisc.edu&noUDP&sock=startd_16580_1454>
-	SlotName: slot1_2@e4032.chtc.wisc.edu
-	CondorScratchDir = "/var/lib/condor/execute/slot1/dir_3844420/scratch"
-	Cpus = 2
-	Disk = 8388608
-	GPUs = 0
-	IoHeavy = 0
-	Memory = 16384
-...
-006 (6208902.081.000) 2026-04-26 12:53:17 Image size of job updated: 944
-	1  -  MemoryUsage of job (MB)
-	944  -  ResidentSetSize of job (KB)
-...
-006 (6208902.081.000) 2026-04-26 12:58:17 Image size of job updated: 264500
-	259  -  MemoryUsage of job (MB)
-	264500  -  ResidentSetSize of job (KB)
-...
-006 (6208902.081.000) 2026-04-26 13:03:18 Image size of job updated: 277976
-	272  -  MemoryUsage of job (MB)
-	277976  -  ResidentSetSize of job (KB)
-...
-006 (6208902.081.000) 2026-04-26 13:08:18 Image size of job updated: 291568
-	285  -  MemoryUsage of job (MB)
-	291568  -  ResidentSetSize of job (KB)
-...
-006 (6208902.081.000) 2026-04-26 13:13:18 Image size of job updated: 305200
-	299  -  MemoryUsage of job (MB)
-	305200  -  ResidentSetSize of job (KB)
-...
-006 (6208902.081.000) 2026-04-26 13:18:19 Image size of job updated: 318484
-	312  -  MemoryUsage of job (MB)
-	318484  -  ResidentSetSize of job (KB)
-...
-006 (6208902.081.000) 2026-04-26 13:23:19 Image size of job updated: 331576
-	324  -  MemoryUsage of job (MB)
-	331576  -  ResidentSetSize of job (KB)
-...
-006 (6208902.081.000) 2026-04-26 13:28:20 Image size of job updated: 344492
-	337  -  MemoryUsage of job (MB)
-	344492  -  ResidentSetSize of job (KB)
-...
-006 (6208902.081.000) 2026-04-26 13:33:20 Image size of job updated: 357464
-	350  -  MemoryUsage of job (MB)
-	357464  -  ResidentSetSize of job (KB)
-...
-006 (6208902.081.000) 2026-04-26 13:38:21 Image size of job updated: 370500
-	362  -  MemoryUsage of job (MB)
-	370500  -  ResidentSetSize of job (KB)
-...
-006 (6208902.081.000) 2026-04-26 13:43:22 Image size of job updated: 383508
-	375  -  MemoryUsage of job (MB)
-	383508  -  ResidentSetSize of job (KB)
-...
-006 (6208902.081.000) 2026-04-26 13:48:22 Image size of job updated: 396524
-	388  -  MemoryUsage of job (MB)
-	396524  -  ResidentSetSize of job (KB)
-...
-006 (6208902.081.000) 2026-04-26 13:53:23 Image size of job updated: 409656
-	401  -  MemoryUsage of job (MB)
-	409656  -  ResidentSetSize of job (KB)
-...
-006 (6208902.081.000) 2026-04-26 13:58:23 Image size of job updated: 422800
-	413  -  MemoryUsage of job (MB)
-	422800  -  ResidentSetSize of job (KB)
-...
-006 (6208902.081.000) 2026-04-26 14:03:24 Image size of job updated: 435892
-	426  -  MemoryUsage of job (MB)
-	435892  -  ResidentSetSize of job (KB)
-...
-006 (6208902.081.000) 2026-04-26 14:07:58 Image size of job updated: 445116
-	426  -  MemoryUsage of job (MB)
-	435892  -  ResidentSetSize of job (KB)
-...
-040 (6208902.081.000) 2026-04-26 14:07:58 Started transferring output files
-...
-040 (6208902.081.000) 2026-04-26 14:07:58 Finished transferring output files
-...
-005 (6208902.081.000) 2026-04-26 14:07:59 Job terminated.
-	(1) Normal termination (return value 0)
-		Usr 0 01:14:05, Sys 0 00:00:08  -  Run Remote Usage
-		Usr 0 00:00:00, Sys 0 00:00:00  -  Run Local Usage
-		Usr 0 01:14:05, Sys 0 00:00:08  -  Total Remote Usage
-		Usr 0 00:00:00, Sys 0 00:00:00  -  Total Local Usage
-	10943  -  Run Bytes Sent By Job
-	7920960  -  Run Bytes Received By Job
-	10943  -  Total Bytes Sent By Job
-	7920960  -  Total Bytes Received By Job
-	Partitionable Resources :      Usage  Request Allocated 
-	   Cpus                 :       0.99        2         2 
-	   Disk (KB)            : 1623576     8388608   8388608 
-	   GPUs                 :                             0 
-	   IoHeavy              :                             0 
-	   Memory (MB)          :     426       16384     16384 
-	   TimeExecute (s)      :    4489                       
-	   TimeSlotBusy (s)     :    4490                       
+009 (6290517.009.000) 2026-05-06 11:56:45 Job was aborted.
+	via condor_rm (by user hhao9)
 ...

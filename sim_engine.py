@@ -7,13 +7,8 @@ Incorporates:
   - dist_type-based very_irregular_distribution (random non-Normal family
     per biomarker per dataset, to stress-test distribution-agnostic
     ordering recovery)
-  - flip_directions sampled ONCE globally and held fixed across all
-    datasets and subtypes. Lowdim (n_bio<=12) uses all-+1 directions to
-    match the biological reality of the ADNI panel (where directions are
-    encoded in the params via sign(theta_mean - phi_mean)). Highdim
-    (n_bio>12) uses random +1/-1 directions sampled once globally,
-    matching the biological constraint that any given biomarker has a
-    stable progression direction across cohorts.
+  - flip_directions are fixed at +1 for all biomarkers. Progression direction
+    is encoded in the params via sign(theta_mean - phi_mean).
 """
 
 from typing import List, Optional, Dict, Any
@@ -454,6 +449,7 @@ def generate_data(
             dist_type_dict=dist_type_dict, rng=rng,
         )
         true_stages = [int(x) for x in all_kjs]
+        true_stages_continuous = []
 
     # ----------------------------------------------------------------
     else:
@@ -513,6 +509,11 @@ def generate_data(
 
         sorted_event_times = sorted(event_times)
         true_stages = [get_rank(sorted_event_times, x) for x in all_kjs]
+        true_stages_continuous = (
+            [float(x) for x in all_kjs]
+            if "kjContinuous" in experiment_name
+            else []
+        )
 
     # ----------------------------------------------------------------
     df = pd.DataFrame(data)
@@ -524,6 +525,15 @@ def generate_data(
         range(1, max_stage + 1),
     ))
     true_order_and_stages_dict[filename]["true_stages"] = true_stages.copy()
+    true_order_and_stages_dict[filename]["true_stages_continuous"] = (
+        true_stages_continuous.copy()
+    )
+    if experiment_name.startswith("xi"):
+        true_order_and_stages_dict[filename]["true_order_continuous"] = (
+            event_time_dict.copy()
+        )
+    else:
+        true_order_and_stages_dict[filename]["true_order_continuous"] = {}
     return df
 
 
@@ -596,27 +606,11 @@ def generate(
     true_order_and_stages_dict = defaultdict(dict)
 
     # ------------------------------------------------------------
-    # GLOBAL flip directions — sampled ONCE for the whole generation run.
-    # Each biomarker has a fixed +1/-1 direction across all datasets and
-    # subtypes, matching the biological reality that real biomarkers have
-    # stable progression directions across cohorts (ABETA decreases, TAU
-    # increases, etc., regardless of which study is run).
-    #
-    # Two regimes:
-    #
-    #   Lowdim (n_bio == 12, ADNI-like biomarker panel):
-    #     All directions = +1. The bm_params themselves already encode
-    #     direction via sign(theta_mean - phi_mean) — e.g., ABETA has
-    #     theta < phi (negative R), so flip=+1 correctly produces a
-    #     decreasing trajectory. This makes the synthetic data match
-    #     the AD biology of the corresponding ADNI biomarkers.
-    #
-    #   Highdim (n_bio > 12, abstract synthetic):
-    #     Each biomarker gets a random +1/-1 direction sampled once
-    #     globally, then held fixed across all datasets. Tests that the
-    #     model handles a panel with mixed directions, while preserving
-    #     the realistic constraint that any given biomarker's direction
-    #     is consistent across cohorts.
+    # GLOBAL flip directions.
+    # Progression direction is already encoded by sign(theta_mean - phi_mean),
+    # so every biomarker uses flip=+1 in both lowdim and highdim. This keeps
+    # highdim aligned with the lowdim/ADNI convention instead of adding an
+    # extra random direction flip.
     #
     # NOTE: flip_directions is only used by the sigmoid measurement model
     # (generate_measurements_sigmoid), which is invoked for "sigmoid"
@@ -624,13 +618,7 @@ def generate(
     # does not use flip_directions — direction is implicit in which
     # distribution (theta vs phi) is sampled from.
     # ------------------------------------------------------------
-    if len(biomarker_names) <= 12:
-        flip_directions_global = {b: 1 for b in biomarker_names}
-    else:
-        flip_directions_global = {
-            b: int((-1) ** rng.binomial(1, 0.5))
-            for b in biomarker_names
-        }
+    flip_directions_global = {b: 1 for b in biomarker_names}
 
     for participant_count in js:
         for healthy_ratio in rs:
@@ -717,6 +705,7 @@ def generate(
                 true_order_and_stages_dict[filename]["N_SUB"]        = int(N_SUB)
                 true_order_and_stages_dict[filename]["TEMPERATURE"]  = TEMPERATURE
                 true_order_and_stages_dict[filename]["TRUE_ORDERINGS"] = SUBTYPE_RANKINGS
+                true_orderings_continuous = []
                 true_order_and_stages_dict[filename]["CONCENTRATION"] = float(W)
 
                 # ----------------------------------------------------------
@@ -760,6 +749,13 @@ def generate(
                         flip_directions=flip_directions,
                         dist_type_dict=dist_type_dict,
                     )
+                    order_continuous = subtype_dict[filename].get(
+                        "true_order_continuous", {}
+                    )
+                    if order_continuous:
+                        true_orderings_continuous.append([
+                            float(order_continuous[b]) for b in biomarker_names
+                        ])
 
                     if len(set(df["diseased"])) != 2:
                         raise ValueError("Zero-length subtype cluster!")
@@ -781,7 +777,17 @@ def generate(
                     old_unique  = pd.unique(df["participant"])
                     stage_map   = dict(zip(df["participant"].unique(),
                                           subtype_dict[filename]["true_stages"]))
+                    stage_continuous = subtype_dict[filename].get(
+                        "true_stages_continuous", []
+                    )
+                    stage_continuous_map = dict(
+                        zip(df["participant"].unique(), stage_continuous)
+                    ) if len(stage_continuous) > 0 else {}
                     dff["stage_assignments"]   = dff["participant"].map(stage_map)
+                    if stage_continuous_map:
+                        dff["stage_assignments_continuous"] = (
+                            dff["participant"].map(stage_continuous_map)
+                        )
                     dff["subtype_assignments"] = subtype_idx
                     new_ids    = np.arange(new_participant_start,
                                            new_participant_start + len(dff))
@@ -795,14 +801,43 @@ def generate(
                     pd.concat(FULL_DF, ignore_index=True)
                     .sort_values(by="participant")
                 )
-                true_order_and_stages_dict[filename]["TRUE_SUBTYPE_ASSIGNMENTS"] = list(
-                    full_data["subtype_assignments"]
+                subtype_assignments = [
+                    int(subtype) if bool(diseased) else None
+                    for subtype, diseased in zip(
+                        full_data["subtype_assignments"],
+                        full_data["diseased"],
+                    )
+                ]
+                true_order_and_stages_dict[filename]["TRUE_SUBTYPE_ASSIGNMENTS"] = (
+                    subtype_assignments
                 )
+                if true_orderings_continuous:
+                    true_order_and_stages_dict[filename][
+                        "TRUE_ORDERINGS_CONTINUOUS"
+                    ] = true_orderings_continuous
+                else:
+                    true_order_and_stages_dict[filename][
+                        "TRUE_ORDERINGS_CONTINUOUS"
+                    ] = []
                 true_order_and_stages_dict[filename]["TRUE_STAGE_ASSIGNMENTS"] = list(
                     full_data["stage_assignments"]
                 )
+                if "stage_assignments_continuous" in full_data.columns:
+                    true_order_and_stages_dict[filename][
+                        "TRUE_STAGE_ASSIGNMENTS_CONTINUOUS"
+                    ] = list(full_data["stage_assignments_continuous"])
+                else:
+                    true_order_and_stages_dict[filename][
+                        "TRUE_STAGE_ASSIGNMENTS_CONTINUOUS"
+                    ] = []
+                true_order_and_stages_dict[filename]["DISEASED_ARR"] = [
+                    int(bool(x)) for x in full_data["diseased"]
+                ]
+                drop_columns = ["subtype_assignments", "stage_assignments"]
+                if "stage_assignments_continuous" in full_data.columns:
+                    drop_columns.append("stage_assignments_continuous")
                 full_data.drop(
-                    columns=["subtype_assignments", "stage_assignments"], inplace=True
+                    columns=drop_columns, inplace=True
                 )
                 full_data.to_csv(f"{output_dir}/{filename}.csv", index=False)
 

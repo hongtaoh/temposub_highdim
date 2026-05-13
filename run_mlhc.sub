@@ -7,7 +7,8 @@ Initialdir = /home/hhao9/temposub_highdim
 transfer_input_files = run_mlhc.py, run_mlhc.sh, all_combinations.txt, run.py, true_order_and_stages.json, config.yaml
 should_transfer_files = YES
 when_to_transfer_output = ON_EXIT
-transfer_output_files = logs, algo_results
+preserve_relative_paths = True
+transfer_output_files = logs, algo_results/pysubebm/results, algo_results/pysubebm_with_labels/results, algo_results/sustain_gmm/results, algo_results/sustain_kde/results
 
 Log = logs/eval_$(fname).log
 Error = logs/eval_$(fname).err

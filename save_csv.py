@@ -82,106 +82,150 @@ def main():
         files = [f for f in os.listdir(algo_dir) if f.endswith('_results.json')]
         for fname in tqdm(files, desc=f"{algo}", leave=False):
             fname_clean = fname.replace("_results.json", "")
-            data_path = os.path.join(DATA_DIR, fname_clean + ".csv")
-            metadata = true_order_and_stages[fname.replace('_results.json', '')]
-            n_subtypes = metadata['N_SUB']
-            mallows_temperature=metadata['TEMPERATURE']
-            kendalls_w = metadata['CONCENTRATION']
-            true_orderings = np.array(metadata['TRUE_ORDERINGS'])
-            true_subtypes = np.array(metadata['TRUE_SUBTYPE_ASSIGNMENTS'])
-            # true_stages = np.array(metadata['TRUE_STAGE_ASSIGNMENTS'])
-            data_df = pd.read_csv(data_path)
-            diseased_arr = np.array(data_df.diseased)
-            healthy_mask = (diseased_arr == 0)
-            diseased_mask = (healthy_mask == 0)
-            data_size = len(true_subtypes)
+            try: 
+                metadata = true_order_and_stages[fname.replace('_results.json', '')]
+                n_subtypes = metadata['N_SUB']
+                mallows_temperature=metadata['TEMPERATURE']
+                kendalls_w = metadata['CONCENTRATION']
+                true_orderings = np.array(metadata['TRUE_ORDERINGS'])
+                true_subtypes = np.array(metadata['TRUE_SUBTYPE_ASSIGNMENTS'])
+                true_stages = np.array(metadata['TRUE_STAGE_ASSIGNMENTS'])
+                diseased_arr = np.array(metadata['DISEASED_ARR'])
+                healthy_mask = (diseased_arr == 0)
+                diseased_mask = (healthy_mask == 0)
+                data_size = len(true_subtypes)
 
-            full_path = os.path.join(algo_dir, fname)
+                full_path = os.path.join(algo_dir, fname)
 
-            # Track found files
-            found_files.add((algo, fname))
+                # Track found files
+                found_files.add((algo, fname))
 
-            # Parse filename components
-            components = extract_components(fname)
-            if not components:
-                failed_files.append((full_path, "Invalid filename format"))
-                continue
+                # Parse filename components
+                components = extract_components(fname)
+                if not components:
+                    failed_files.append((full_path, "Invalid filename format"))
+                    continue
 
-            J, R, E, M = components
-            try:
-                J = int(J)
-                R = float(R)
-                M = int(M)
-            except ValueError:
-                failed_files.append((full_path, "Invalid numeric format in filename"))
-                continue
-                
-            # Validate against config
-            if J not in JS:
-                failed_files.append((full_path, f"Invalid J value {J}"))
-                continue
-            if R not in RS:
-                failed_files.append((full_path, f"Invalid R value {R}"))
-                continue
-            if E not in EXPERIMENTS:
-                failed_files.append((full_path, f"Invalid experiment {E}"))
-                continue
-            if not (0 <= M < N_VARIANTS):
-                failed_files.append((full_path, f"Invalid M value {M}"))
-                continue
-
-            # Load and validate JSON content
-            try:
-                with open(full_path, 'r') as f:
-                    data = json.load(f)
-                
-                # if 'kendalls_tau' not in data or 'mean_absolute_error' not in data:
-                #     failed_files.append((full_path, "Missing metrics in JSON"))
-                #     continue
-
-                # algo_pretty = CONVERT_ALGO_DICT.get(algo.lower(), algo)  # fallback to raw if not found
-                algo_pretty = CONVERT_ALGO_DICT.get(algo, algo)
-                E_pretty = CONVERT_E_DICT.get(E, E)
-                E_num = GET_E_NUM.get(E_pretty, 0)
-
-                subtype_acc = None
-                mean_stage_healthy = None
-                runtime_cross_validation = None 
-                absolute_error_n_subtypes = None 
-                relative_error = 100
-                correct_bool = 100
-                runtime = 0.0
-
-                if algo == 'pysubebm':
-                    temp_algo = 'Random Guessing'
-                    estimated_orderings = np.array([rng.permutation(np.arange(12)) for _ in range(n_subtypes)])
-                    # Per-file independent RNG instead of shared rng
-                    file_rng = np.random.default_rng(abs(hash(fname)) % (2**32))
-                    ml_subtype = file_rng.integers(1, n_subtypes+1, size=data_size) 
-                    ml_stage = file_rng.integers(0, 13, size=data_size)
-                    n = len(estimated_orderings)
-                    dist = np.zeros((n, n))
-                    # i can safely use the sequence results because they are the indices of the fixed input biomarker array!
-                    for i in range(n):
-                        for j in range(n):
-                            dist[i,j]= utils.normalized_kendalls_tau_distance(
-                                true_orderings[i], estimated_orderings[j])
-                        
-                    # This finds the best matching: estimated_indices[i] -> true_indices[i]
-                    estimated_indices, true_indices = linear_sum_assignment(dist)
-                    # Calculate the matched Kendall's Tau
-                    kendalls_tau = dist[estimated_indices, true_indices].mean()
-
-                    if n_subtypes > 1:
-                        ml_subtypes = ml_subtype[diseased_mask]
-                        true_subtype_assignments = true_subtypes[diseased_mask]
-                        subtype_acc = adjusted_rand_score(true_subtype_assignments, ml_subtypes)
-                    else:
-                        subtype_acc = np.nan
+                J, R, E, M = components
+                try:
+                    J = int(J)
+                    R = float(R)
+                    M = int(M)
+                except ValueError:
+                    failed_files.append((full_path, "Invalid numeric format in filename"))
+                    continue
                     
-                    mean_stage_healthy = np.mean(ml_stage[healthy_mask])
-                    estimated_n_subtype = rng.integers(1, 7, size = 1)
-                    absolute_error_n_subtypes = abs(estimated_n_subtype[0] - n_subtypes)
+                # Validate against config
+                if J not in JS:
+                    failed_files.append((full_path, f"Invalid J value {J}"))
+                    continue
+                if R not in RS:
+                    failed_files.append((full_path, f"Invalid R value {R}"))
+                    continue
+                if E not in EXPERIMENTS:
+                    failed_files.append((full_path, f"Invalid experiment {E}"))
+                    continue
+                if not (0 <= M < N_VARIANTS):
+                    failed_files.append((full_path, f"Invalid M value {M}"))
+                    continue
+
+                # Load and validate JSON content
+                try:
+                    with open(full_path, 'r') as f:
+                        data = json.load(f)
+                    
+                    # if 'kendalls_tau' not in data or 'mean_absolute_error' not in data:
+                    #     failed_files.append((full_path, "Missing metrics in JSON"))
+                    #     continue
+
+                    # algo_pretty = CONVERT_ALGO_DICT.get(algo.lower(), algo)  # fallback to raw if not found
+                    algo_pretty = CONVERT_ALGO_DICT.get(algo, algo)
+                    E_pretty = CONVERT_E_DICT.get(E, E)
+                    E_num = GET_E_NUM.get(E_pretty, 0)
+
+                    subtype_acc = None
+                    stage_mae = None
+                    mean_stage_healthy = None
+                    runtime_cross_validation = None 
+                    absolute_error_n_subtypes = None 
+                    relative_error = 100
+                    correct_bool = 100
+                    runtime = 0.0
+
+                    if algo == 'pysubebm':
+                        temp_algo = 'Random Guessing'
+                        estimated_orderings = np.array([rng.permutation(np.arange(12)) for _ in range(n_subtypes)])
+                        # Per-file independent RNG instead of shared rng
+                        file_rng = np.random.default_rng(abs(hash(fname)) % (2**32))
+                        ml_subtype = file_rng.integers(1, n_subtypes+1, size=data_size) 
+                        ml_stage = file_rng.integers(0, 13, size=data_size)
+                        n = len(estimated_orderings)
+                        dist = np.zeros((n, n))
+                        # i can safely use the sequence results because they are the indices of the fixed input biomarker array!
+                        for i in range(n):
+                            for j in range(n):
+                                dist[i,j]= utils.normalized_kendalls_tau_distance(
+                                    true_orderings[i], estimated_orderings[j])
+                            
+                        # This finds the best matching: estimated_indices[i] -> true_indices[i]
+                        estimated_indices, true_indices = linear_sum_assignment(dist)
+                        # Calculate the matched Kendall's Tau
+                        kendalls_tau = dist[estimated_indices, true_indices].mean()
+
+                        if n_subtypes > 1:
+                            ml_subtypes = ml_subtype[diseased_mask]
+                            true_subtype_assignments = true_subtypes[diseased_mask]
+                            subtype_acc = adjusted_rand_score(true_subtype_assignments, ml_subtypes)
+                        else:
+                            subtype_acc = np.nan
+                        
+                        stage_mae = float(np.mean(np.abs(ml_stage - true_stages)))
+                        mean_stage_healthy = np.mean(ml_stage[healthy_mask])
+                        estimated_n_subtype = rng.integers(1, 7, size = 1)
+                        absolute_error_n_subtypes = abs(estimated_n_subtype[0] - n_subtypes)
+
+                        records.append({
+                            'J': J,
+                            'R': R,
+                            'E': E_pretty,
+                            'M': M,
+                            'E_Num': int(E_num),
+                            'algo': temp_algo,
+                            'n_subtypes': n_subtypes,
+                            'mallows_temperature': mallows_temperature,
+                            'kendalls_w': kendalls_w,
+                            'runtime': runtime,
+                            'kendalls_tau': kendalls_tau,
+                            'subtype_acc': subtype_acc,
+                            'stage_mae': stage_mae,
+                            'mean_stage_healthy': mean_stage_healthy,
+                            'runtime_cross_validation': runtime_cross_validation,
+                            'absolute_error_n_subtypes': absolute_error_n_subtypes,
+                            'relative_error': relative_error,
+                            'correct_bool': correct_bool
+                        })
+                    if 'pysubebm' in algo:
+                        kendalls_tau = data['kendalls_tau']
+                        if n_subtypes > 1:
+                            subtype_acc = data['subtype_acc']
+                        else:
+                            subtype_acc = np.nan 
+                        stage_mae = data['stage_mae']
+                        mean_stage_healthy = data['mean_stage_healthy']
+                    else:
+                        kendalls_tau = data['tau_argsort']
+                        if n_subtypes > 1:
+                            subtype_acc = data['subtype_acc_mcmc']
+                        else:
+                            subtype_acc = np.nan 
+                        stage_mae = data['stage_mae']
+                        mean_stage_healthy = data['mean_stage_healthy_mcmc']
+                    runtime = data['runtime']/60
+                    # if E_num == 1:
+                    #     runtime_cross_validation = data['runtime_cross_validation']
+                    #     absolute_error_n_subtypes = data['absolute_error']
+                    #     relative_error = data['relative_error']
+                    #     correct_bool = data['correct_bool']
 
                     records.append({
                         'J': J,
@@ -189,63 +233,26 @@ def main():
                         'E': E_pretty,
                         'M': M,
                         'E_Num': int(E_num),
-                        'algo': temp_algo,
+                        'algo': algo_pretty,
                         'n_subtypes': n_subtypes,
                         'mallows_temperature': mallows_temperature,
                         'kendalls_w': kendalls_w,
                         'runtime': runtime,
                         'kendalls_tau': kendalls_tau,
                         'subtype_acc': subtype_acc,
+                        'stage_mae': stage_mae,
                         'mean_stage_healthy': mean_stage_healthy,
                         'runtime_cross_validation': runtime_cross_validation,
                         'absolute_error_n_subtypes': absolute_error_n_subtypes,
                         'relative_error': relative_error,
                         'correct_bool': correct_bool
                     })
-                if 'pysubebm' in algo:
-                    kendalls_tau = data['kendalls_tau']
-                    if n_subtypes > 1:
-                        subtype_acc = data['subtype_acc']
-                    else:
-                        subtype_acc = np.nan 
-                    mean_stage_healthy = data['mean_stage_healthy']
-                else:
-                    kendalls_tau = data['tau_argsort']
-                    if n_subtypes > 1:
-                        subtype_acc = data['subtype_acc_mcmc']
-                    else:
-                        subtype_acc = np.nan 
-                    mean_stage_healthy = data['mean_stage_healthy_mcmc']
-                runtime = data['runtime']/60
-                # if E_num == 1:
-                #     runtime_cross_validation = data['runtime_cross_validation']
-                #     absolute_error_n_subtypes = data['absolute_error']
-                #     relative_error = data['relative_error']
-                #     correct_bool = data['correct_bool']
-
-                records.append({
-                    'J': J,
-                    'R': R,
-                    'E': E_pretty,
-                    'M': M,
-                    'E_Num': int(E_num),
-                    'algo': algo_pretty,
-                    'n_subtypes': n_subtypes,
-                    'mallows_temperature': mallows_temperature,
-                    'kendalls_w': kendalls_w,
-                    'runtime': runtime,
-                    'kendalls_tau': kendalls_tau,
-                    'subtype_acc': subtype_acc,
-                    'mean_stage_healthy': mean_stage_healthy,
-                    'runtime_cross_validation': runtime_cross_validation,
-                    'absolute_error_n_subtypes': absolute_error_n_subtypes,
-                    'relative_error': relative_error,
-                    'correct_bool': correct_bool
-                })
-            except json.JSONDecodeError:
-                failed_files.append((full_path, "Invalid JSON format"))
-            except Exception as e:
-                failed_files.append((full_path, f"Unexpected error: {str(e)}"))
+                except json.JSONDecodeError:
+                    failed_files.append((full_path, "Invalid JSON format"))
+                except Exception as e:
+                    failed_files.append((full_path, f"Unexpected error: {str(e)}"))
+            except:
+                pass 
     
     # Calculate missing files
     missing_files = expected_files - found_files
