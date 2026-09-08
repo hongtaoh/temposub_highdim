@@ -1,119 +1,98 @@
-# Reproducible codes for BEBMS
+# CHTC high-dimensional experiments for the Subtrace/TempoSub paper
 
-This repository contains codes for the ML4H (2025) submission of [*Bayesian Event-Based Model for Disease Subtype and Stage Inference*](https://arxiv.org/pdf/2512.03467).
+This directory contains the code and archived outputs for running the
+100-biomarker synthetic baseline experiments on the Center for High Throughput
+Computing (CHTC). The evaluated algorithms are BEBMS (with and without subtype
+labels), SuStaIn GMM, and SuStaIn KDE.
 
-Note that the data generation and experiments are conducted on a high-performance computing platform (CHTC at the University of Wisconsin--Madison) due to the large number of jobs to run. You can, however, modify relevant files to run on personal computers.
+## Exp5 and Exp8 correction
 
-Many plots of our paper are available on Observable: [@hongtaoh/subtypes-results](https://observablehq.com/@hongtaoh/subtypes-results).
+The original high-dimensional data were generated with the same 820-line
+`sim_engine.py` used by the low-dimensional CHTC experiments. In that version,
+low-dimensional biomarkers always used progression direction `+1`, but each
+high-dimensional biomarker was assigned a fixed random `+1` or `-1` direction.
+The direction flag is used only by the sigmoid measurement model, so this
+affected only:
 
-## Cite this paper
+- Exp5: `sn_kjContinuousBeta_sigmoid`
+- Exp8: `xiNearNormalWithNoise_kjContinuousBeta_sigmoid`
 
-```
-@inproceedings{Hao2025bayesian,
-  author    = {Hongtao Hao and Joseph L. Austerweil},
-  title     = {Bayesian Event-Based Model for Disease Subtype and Stage Inference},
-  booktitle = {Proceedings of the 5th Machine Learning for Health Symposium},
-  volume    = {297},
-  pages     = {??--??}, % Page numbers are not provided now, will add later. 
-  year      = {2025},
-  publisher = {PMLR},
-}
-```
+The intended convention was to let the biomarker parameters encode progression
+direction and therefore use `+1` for every biomarker. Exp5 and Exp8 were
+regenerated and rerun using this corrected convention. The other seven
+experiments were unaffected and were not rerun.
 
-## Installation and Setup
+During the redo, `config.yaml` enabled only Exp5 and Exp8. Consequently, the
+CHTC staging input tarball and the regenerated `true_order_and_stages.json`
+contained only the 100 replacement datasets (50 per experiment). This did not
+delete the other experiments' result JSON files: the deletion commands in
+`run.sh` were commented out, so the returned Exp5/8 files replaced matching old
+files while the other results remained in `algo_results/`.
+
+The current `algo_results/` therefore contains:
+
+- corrected, rerun results for Exp5 and Exp8; and
+- original results for Exp1–4, Exp6, Exp7, and Exp9.
+
+All 400 current Exp5/8 algorithm JSON files match the replacement
+`all_results.csv`. The 1,378 retained algorithm JSON files for the other
+experiments match `all_results_before_redo_exp5_8.csv`.
+
+## Result files
+
+| File | Meaning |
+| --- | --- |
+| `all_results_before_redo_exp5_8.csv` | Historical results before the Exp5/8 correction. Its Exp5/8 rows are obsolete; its other rows are retained. |
+| `all_results.csv` | Results produced after rerunning corrected Exp5/8. It contains only Exp5/8. |
+| `final_all_results.csv` | Combined results created by `merge_two_results.py`; this is the file to use after regenerating it with the corrected merge script. |
+| `algo_results/` | Raw result JSON files: corrected Exp5/8 plus retained results for the other experiments. |
+| `true_order_and_stages.json` | Ground truth for the regenerated Exp5/8 datasets only. |
+
+Because only two experiment names were enabled when `save_csv.py` created
+`all_results.csv`, its positional numbering incorrectly assigned `E_Num = 1`
+and `E_Num = 2` to Exp5 and Exp8. `merge_two_results.py` now corrects these to
+5 and 8 using the experiment-name column before merging. It also removes the
+old rows by experiment name rather than relying on `E_Num`.
+
+To create the corrected combined CSV, run this command from this directory:
 
 ```sh
-pip install bebms
+python3 merge_two_results.py
 ```
 
-Please refer to [https://github.com/hongtaoh/bebms_pkg](https://github.com/hongtaoh/bebms_pkg) for more information about the package. 
+The expected output contains 2,227 rows with this experiment mapping:
 
-## High dimensional data
+| E_Num | Experiment | Rows |
+| ---: | --- | ---: |
+| 1 | `sn_kjOrdinalDM_xnjNormal` | 250 |
+| 2 | `sn_kjOrdinalDM_xnjNonNormal` | 235 |
+| 3 | `sn_kjOrdinalUniform_xnjNormal` | 250 |
+| 4 | `sn_kjOrdinalUniform_xnjNonNormal` | 248 |
+| 5 | `sn_kjContinuousBeta_sigmoid` | 250 |
+| 6 | `sn_kjContinuousBeta_xnjNormal` | 250 |
+| 7 | `sn_kjContinuousBeta_xnjNonNormal` | 244 |
+| 8 | `xiNearNormalWithNoise_kjContinuousBeta_sigmoid` | 250 |
+| 9 | `xiNearNormalWithNoise_kjContinuousBeta_xnjNormal` | 250 |
 
-Within the folder of [`high_dimensional`](high_dimensional/), you can find:
+The total is below the theoretical 2,250 rows because 22 older algorithm jobs
+are missing in Exp2, Exp4, and Exp7; one missing BEBMS result also means that
+its corresponding Random Guessing row could not be generated.
 
-- `high_dimensional.json`: the theta/phi parameters for the 100 synthetic biomarkers generated by ChatGPT. 
-- `data` folder: the five datasets generated using `bebms` based on `high_dimensional.json`. 
-- `bebms_results` folder: the results of running `bebms` on the five datasets. 
+## Archived CHTC workflow
 
+- `gen.py` generates the configured datasets and ground-truth metadata.
+- `gen.sh` historically regenerated the data, replaced the CHTC staging
+  tarball, and submitted the jobs. It is destructive to the local `data/` and
+  ground-truth files and should not be run merely to rebuild result tables.
+- `gen_combo.py` creates `all_combinations.txt` from `config.yaml`.
+- `run.sh` prepares and submits the HTCondor jobs.
+- `run_mlhc.sub` defines file transfer and resource requests.
+- `run_mlhc.sh` extracts the environment and staged data on each worker.
+- `run_mlhc.py` runs all four algorithms for one dataset.
+- `save_csv.py` converts raw result JSON files into a result table when the
+  corresponding ground-truth metadata are available.
+- `merge_two_results.py` combines the retained original rows with corrected
+  Exp5/8 rows.
 
-## How to generate synthetic data?
-
-### Obtain theta/phi values of 12 biomarkers
-
-`adni_params_ucl_gmm.json` are the results of running the GMM algorithm of https://github.com/ucl-pond/kde_ebm on the [ADNI](https://adni.loni.usc.edu/) data. We ran this algorithm because it was developed by the same authors of SuStaIn, the baseline we are benchmarking against.
-
-The parameter results are obtained by running `python3 get_adni_params.py`, which is based upon `utils_adni.py`.
-
-`utils_adni.py` contains the implementations for the descriptions about processing ADNI data in Section 4 of our manuscript.
-
-**Please note that in this procedure, `adni.csv` will be generated and that is the real-world ADNI dataset.**
-
-### How to get raw ADNI data?
-
-In `get_adni_params.py`, you can see you need `ADNIMERGE.csv`. You can get it by [apply for data access through ADNI](https://adni.loni.usc.edu/data-samples/adni-data/#AccessData). They process requests within one week.
-
-After you are granted the access, log in [https://ida.loni.usc.edu/login.jsp](https://ida.loni.usc.edu/login.jsp). Then go to [https://ida.loni.usc.edu/home/projectPage.jsp?project=ADNI](https://ida.loni.usc.edu/home/projectPage.jsp?project=ADNI). Click "Search & Download". In the dropdown menu, click "Study Files".
-
-You'll see "Analysis Ready Cohort (ARC) Builder". In the search box, type "merge".
-
-![ADNI](img/adni.png)
-
-Download the following two files:
-
-- ADNIMERGE-Key ADNI tables merged into one table [ADNI1,GO,2,3]
-
-- ADNIMERGE-Key ADNI tables merged into one table - Dictionary [ADNI1,GO,2,3]
-
-
-### Generate synthetic data
-
-Related files are `gen.sh` and `gen.py`.
-
-To generate synthetic data, run `bash gen.sh`. The resulting folder and files will be
-
-- `data` folder which contains the raw data in `csv` format.
-- `true_order_and_stages.json`, which contains the true progression and disease stages for model evaluations.
-
-### Hyper-parameters
-
-Some of the most important hyper-parameters we mentioned in Section 4:
-
-- 1-5 subtypes
-- 12 biomarkers from adni.
-- at least 10 progressing participants for each subtype. 
-- The number of participants for each subtype is decided using dirichlet-multinomial. dirichlet prior is randomly chosen from [0.1, 2, 5, 20].
-- mallows sampling temperature is uniformly sampled from [0.01, 0.5].
-
-For more parameters, see `config.yaml`.
-
-Note that we made a mistake in our manuscript:
-
-## How to run synthetic experiments
-
-Related files are `run_mlhc.py`, `run_mlhc.sh`, and `run_mlhc.sub`.
-
-Run `bash run.sh` to run the experiments. All results will be saved to the folder of [`algo_results`](/algo_results).
-
-## How to analyze synthetic data results
-
-Run `python3 save_csv.py`. You'll get all the results as `all_results.csv`.
-
-For data analysis and visualizations, we used Observable. Since we cannot anonymize the notebooks, we are not able to share the codes at this point for the reviewing purpose.
-
-## How to analyze the real-world ADNI results
-
-Related files are in the folder of `experimental_notebooks`.
-
-- `notebooks/2025-09-06-adni-bebms.ipynb`: Running Bebms on ADNI.
-- `notebooks/2025-09-06-adni-sustain-ordering.ipynb`: Running SuStaIn on ADNI.
-- `notebooks/2025-09-06-bebms-cv.ipynb`: Cross validation of BebmS.
-- `notebooks/2025-09-06-sustain-adni-cv.ipynb`: Cross validation of SuStaIn.
-
-## Other files
-
-- `gen_combo.py`: to generate filenames to be used in all `sh` files. The results will be `all_combinations.txt`. We also have `test_combinations.txt` for testing purposes.
-- `failed_files.txt`, `missing_files.txt`, `na_combinations.txt` are the diagnostic files after running `python3 save_csv.py`.
-- `cleanup.sh`: SuStaIn will result in many pickle files. We use this script to delete all of the unnecessary files.
-- `notebooks/2025-11-06-plot-distributions.ipynb` plotted the "Theoretical and Empirical Biomarker Distributions".
-- `notebooks/2025-11-08-additional-plots.ipynb` plotted the distribution of relative error in estimating optimal subtype count, and the distribution of Kendall's $W$. 
+The CHTC staging area referenced by these scripts is historical and is not part
+of this local directory.

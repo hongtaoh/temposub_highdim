@@ -1,38 +1,50 @@
-'''
-Merge all_results_before_redo_exp5_8.csv and all_results. 
+"""Merge the retained results with the corrected Exp5 and Exp8 results.
 
-So right now, the data in the staging contian only exp5&8. This is because I changed the `sim_engine.py` 
-which now uses fixed +-1 for sigmoid experiments. 
+``all_results_before_redo_exp5_8.csv`` contains the original results for all
+nine experiments. ``all_results.csv`` contains the rerun results for Exp5 and
+Exp8, generated after fixing the high-dimensional sigmoid direction at +1.
 
-all_results_before_redo_exp5_8.csv contain all the results before I do this. 
-
-all_results.csv now is only exp5&8 results. 
-
-Note that in algo_results, I still have all the results. So the results in algo_results are complete.
-
-I will rerun later, but not now. 
-
-What I will do here is that i will delete all rows in all_results_before_redo_exp5_8.csv
-whose E_num is 5. and just append all_results.csv to the end of the modified all_results_before_redo_exp5_8.csv.
-'''
+Because only Exp5 and Exp8 were enabled when ``all_results.csv`` was created,
+``save_csv.py`` numbered them 1 and 2 based on their positions in the shortened
+configuration. Correct those numbers here before replacing the old Exp5/8 rows.
+"""
 
 import pandas as pd
 
-# File paths
-original_file = "all_results_before_redo_exp5_8.csv"
-append_file = "all_results.csv"
+ORIGINAL_FILE = "all_results_before_redo_exp5_8.csv"
+APPEND_FILE = "all_results.csv"
+OUTPUT_FILE = "final_all_results.csv"
 
-# Load CSVs
-df_original = pd.read_csv(original_file)
-df_append = pd.read_csv(append_file)
+EXP_NUMBER_MAP = {
+    "sn_kjContinuousBeta_sigmoid": 5,
+    "xiNearNormalWithNoise_kjContinuousBeta_sigmoid": 8,
+}
 
-# Remove rows where E_Num is 5 or 8
-df_filtered = df_original[~df_original["E_Num"].isin([5, 8])]
+df_original = pd.read_csv(ORIGINAL_FILE)
+df_append = pd.read_csv(APPEND_FILE)
 
-# Append new results
+# The replacement CSV should contain only Exp5 and Exp8.
+unexpected_experiments = set(df_append["E"].dropna().unique()) - set(EXP_NUMBER_MAP)
+if unexpected_experiments:
+    raise ValueError(
+        "all_results.csv contains unexpected experiments: "
+        f"{sorted(unexpected_experiments)}"
+    )
+
+# Assign the true experiment numbers explicitly. Do not rely on the shortened
+# EXPERIMENT_NAMES list that was active when save_csv.py generated this CSV.
+df_append = df_append.copy()
+df_append["E_Num"] = df_append["E"].map(EXP_NUMBER_MAP)
+if df_append["E_Num"].isna().any():
+    raise ValueError("Some replacement rows could not be assigned an E_Num")
+df_append["E_Num"] = df_append["E_Num"].astype(int)
+
+# Remove the old Exp5/8 rows by experiment name, then append their rerun rows.
+# Filtering by E is safer than trusting a potentially incorrect E_Num column.
+df_filtered = df_original[~df_original["E"].isin(EXP_NUMBER_MAP)]
 df_final = pd.concat([df_filtered, df_append], ignore_index=True)
 
-# Save back to the original file
-df_final.to_csv('final_all_results.csv', index=False)
+df_final.to_csv(OUTPUT_FILE, index=False)
 
 print(f"Done. Final row count: {len(df_final)}")
+print(df_final.groupby(["E_Num", "E"]).size().to_string())
